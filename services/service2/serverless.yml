@@ -13,4 +13,4 @@ functions:
   get:
     handler: handler.main
     events:
-      - http: GET /posts
+      - http: GET /
