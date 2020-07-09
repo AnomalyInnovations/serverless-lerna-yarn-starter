@@ -1,0 +1,16 @@
+service: serverless-lerna-yarn-service2
+
+plugins:
+  - serverless-bundle
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  stage: dev
+
+functions:
+  get:
+    handler: handler.main
+    events:
+      - http: GET /posts
