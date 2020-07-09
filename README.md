@@ -4,16 +4,16 @@ A Serverless monorepo starter that uses [Lerna](https://lerna.js.org) and [Yarn 
 
 - Designed to scale for larger projects
 - Maintains internal dependencies as packages
+- Uses Lerna to figure out which services have been updated 
 - Supports publishing dependencies as private NPM packages
 - Uses [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) to generate optimized Lambda packages
-- Uses Lerna to figure out which services have been updated 
 - Uses Yarn Workspaces to hoist packages to the root `node_modules/` directory
 
 -----
 
 ## Installation
 
-To create a new Serverless project.
+To create a new Serverless project
 
 ``` bash
 $ serverless install --url https://github.com/AnomalyInnovations/serverless-lerna-yarn-starter --name my-project
@@ -33,7 +33,7 @@ $ yarn
 
 ## How It Works
 
-The directory structure looks roughly like:
+The directory structure roughly looks like:
 
 ```
 package.json
@@ -66,7 +66,7 @@ This repo is split into 3 directories. Each with a different purpose:
   1. `service1`: Depends on the `sample-package`. This means that if it changes, we want to deploy `service1`.
   2. `service2`: Does not depend on any internal packages.
 
-  More on the deployments below.
+  More on deployments below.
 
 - libs
 
@@ -87,7 +87,7 @@ $ yarn add some-npm-package
 Run a function locally.
 
 ``` bash
-$ serverless invoke local --function get
+$ serverless invoke local -f get
 ```
 
 Run tests in a service.
@@ -132,7 +132,7 @@ Packages can also be optionally published to NPM.
 
 ### Libs
 
-If you need to add any other common code in your repo that is not going to be maintained as a package, add it to the `libs/` directory. It does not contain a `package.json`. This means that you'll need to install any NPM packages as dependencies in the root.
+If you need to add any other common code in your repo that won't be maintained as a package, add it to the `libs/` directory. It does not contain a `package.json`. This means that you'll need to install any NPM packages as dependencies in the root.
 
 To install an NPM package at the root.
 
@@ -161,7 +161,7 @@ We want to ensure that only the services that have been updated get deployed. Th
 To implement the above, use the following algorithm in your CI:
 
 1. Run `lerna ls --since ${prevCommitSHA} -all` to list all packages that have changed since the last successful deployment. If this list includes one of the services, then deploy it.
-2. Run `git diff --name-only ${prevCommitSHA} ${currentCommitSHA}` to see if any files have changed that don't belong to any of your Yarn workspaces (listed in the root `package.json`). If found, then deploy all the services.
+2. Run `git diff --name-only ${prevCommitSHA} ${currentCommitSHA}` to get a list of all the updated files. If any of them don't belong to your Yarn Workspaces (listed in the root `package.json`), deploy all the services.
 3. Otherwise skip the deployment.
 
 
@@ -175,26 +175,26 @@ check_code_change: lerna
 
 To test this:
 
-### Add the App
+**Add the App**
 
-1. Fork this repo and add it to [your Seed account](https://console.seed.run)
-2. Add both the services
-3. Deploy your app once
+1. Fork this repo and add it to [your Seed account](https://console.seed.run).
+2. Add both of the services.
+3. Deploy your app once.
 
-### Update a Service
+**Update a Service**
 
-- Make a change in `services/service2/handler.js` and git push
-- Notice that `service2` has been deployed while `service1` was skipped
+- Make a change in `services/service2/handler.js` and git push.
+- Notice that `service2` has been deployed while `service1` was skipped.
 
-### Update a Package
+**Update a Package**
 
-- Make a change in `packages/sample-package/index.js` and git push
-- Notice that `service1` should be deployed while `service2` will have been skipped
+- Make a change in `packages/sample-package/index.js` and git push.
+- Notice that `service1` should be deployed while `service2` will have been skipped.
 
-### Update a Lib
+**Update a Lib**
 
-- Finally, make a change in `libs/index.js` and git push
-- Both `service1` and `service2` should've been deployed
+- Finally, make a change in `libs/index.js` and git push.
+- Both `service1` and `service2` should've been deployed.
 
 -------
 
