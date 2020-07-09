@@ -76,7 +76,9 @@ The `packages/` and `services/` directories are Yarn Workspaces.
 
 ### Services
 
-The Serverless services are meant to be managed on their own.
+The Serverless services are meant to be managed on their own. Each service is based on our [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter). It uses the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin (based on [Webpack](https://webpack.js.org)) to create optimized Lambda packages.
+
+This is good for keeping your Lambda packages small. But it also ensures that you can have Yarn hoist all your NPM packages to the project root. Without Webpack, you'll need to disable hoisting since Serverless Framework does not package the dependencies of a service correctly on its own.
 
 Install an NPM package inside a service.
 
