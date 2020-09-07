@@ -16,7 +16,7 @@ A Serverless monorepo starter that uses [Lerna](https://lerna.js.org) and [Yarn 
 To create a new Serverless project
 
 ``` bash
-$ serverless install --url https://github.com/AnomalyInnovations/serverless-lerna-yarn-starter --name my-project
+$ git clone https://github.com/AnomalyInnovations/serverless-lerna-yarn-starter my-project
 ```
 
 Enter the new directory
