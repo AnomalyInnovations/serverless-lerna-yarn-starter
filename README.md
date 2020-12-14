@@ -123,7 +123,7 @@ $ yarn
 
 Since each package has its own `package.json`, you can manage it just like you would any other NPM package.
 
-To add a new package.
+To add a new package:
 
 ``` bash
 $ mkdir packages/new-package
@@ -131,6 +131,14 @@ $ yarn init
 ```
 
 Packages can also be optionally published to NPM.
+
+To use a package:
+
+```bash
+$ yarn add new-package@1.0.0
+```
+
+Note that packages should be added by specifying the version number declared in their `package.json`. Otherwise, yarn tries to find the dependency in the registry.
 
 ### Libs
 
