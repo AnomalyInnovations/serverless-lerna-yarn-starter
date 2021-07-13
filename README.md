@@ -1,4 +1,4 @@
-# Serverless Lerna + Yarn Workspaces Monorepo Starter
+# Serverless Lerna + Yarn Workspaces Starter [![Seed Status](https://api.seed.run/serverless-stack/serverless-lerna-yarn-starter/stages/dev/build_badge)](https://console.seed.run/serverless-stack/serverless-lerna-yarn-starter)
 
 A Serverless monorepo starter that uses [Lerna](https://lerna.js.org) and [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/).
 
