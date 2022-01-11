@@ -10,6 +10,6 @@
     "sample": "^0.0.1"
   },
   "devDependencies": {
-    "serverless-bundle": "^1.9.0"
+    "serverless-bundle": "^5.2.0"
   }
 }
