@@ -7,6 +7,6 @@
     "test": "serverless-bundle test"
   },
   "devDependencies": {
-    "serverless-bundle": "^1.9.0"
+    "serverless-bundle": "^5.2.0"
   }
 }
